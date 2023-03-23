@@ -15,10 +15,12 @@ def index():
         # Make the NOAA API request and process the results
         url = f'https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&area={state}&urgency={urgency}&severity={severity}&certainty={certainty}&limit={max_results}'
         # ...
-
-        return render_template('results.html', alerts=alerts)
-
-    return render_template('index.html')
+        headers = {'User-Agent': 'MyWeatherApp (myweatherapp.com, contact@myweatherapp.com)'}
+        response = requests.get(url, headers=headers)
+        alerts = response.json() 
+        return render_template('index.html', alerts=alerts.get('features', []))
+    else:
+        return render_template('index.html', alerts=None)
 
 if __name__ == '__main__':
     app.run(debug=True)
