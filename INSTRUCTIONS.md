@@ -21,4 +21,4 @@
 ## Time spent on the project
 
 - Part 1: 1 hour
-- Part 2: 1 hour
+- Part 2: 2 hours
