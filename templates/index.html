@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <title>Weather Alerts</title>
+</head>
+<body>
+    <h1>Weather Alerts</h1>
+    <form method="POST">
+        <!-- Add form fields here -->
+        <label for="state">State:</label>
+        <select name="state" id="state" required>
+            <!-- Add all 50 US states as <option> elements -->
+        </select>
+        <label for="severity">Severity:</label>
+        <select name="severity" id="severity">
+            <option value="Extreme">Extreme</option>
+            <option value="Severe">Severe</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Minor">Minor</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+        <label for="urgency">Urgency:</label>
+        <select name="urgency" id="urgency">
+            <option value="Immediate">Immediate</option>
+            <option value="Expected">Expected</option>
+            <option value="Immediate">Future</option>
+            <option value="Immediate">Unknown</option>
+            <!-- Add other urgency options -->
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
