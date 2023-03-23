@@ -1,26 +1,38 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, jsonify
 import requests
 
-app = Flask(__name__) # Initialize Flask app
+app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+us_states = [
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+]
+
+@app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == 'POST':
-        state = request.form.get('state')
-        urgency = request.form.get('urgency')
-        severity = request.form.get('severity')
-        certainty = request.form.get('certainty')
-        max_results = request.form.get('max_results')
+    if request.method == "POST":
+        state = request.form['state']
+        urgency = request.form['urgency']
+        severity = request.form['severity']
+        certainty = request.form['certainty']
+        max_results = int(request.form['max_results'])
 
-        # Make the NOAA API request and process the results
-        url = f'https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&area={state}&urgency={urgency}&severity={severity}&certainty={certainty}&limit={max_results}'
-        # ...
-        headers = {'User-Agent': 'MyWeatherApp (myweatherapp.com, contact@myweatherapp.com)'}
-        response = requests.get(url, headers=headers)
-        alerts = response.json() 
-        return render_template('index.html', alerts=alerts.get('features', []))
-    else:
-        return render_template('index.html', alerts=None)
+        params = {
+            'active': 'true',
+            'status': 'actual',
+            'message_type': 'alert',
+            'area': state,
+            'urgency': urgency,
+            'severity': severity,
+            'certainty': certainty
+        }
 
-if __name__ == '__main__':
+        response = requests.get("https://api.weather.gov/alerts", params=params, headers={'User-Agent': 'myweatherapp'})
+        data = response.json()
+        alerts = data['features'][:max_results]
+
+        return jsonify(alerts)
+
+    return render_template("index.html", us_states=us_states)
+
+if __name__ == "__main__":
     app.run(debug=True)
