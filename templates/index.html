@@ -67,10 +67,19 @@
 
             data.forEach(alert => {
                 const alertElement = document.createElement('div');
-                alertElement.innerHTML = `<h3>${alert.properties.headline}</h3><p>${alert.properties.description}</p>`;
+                alertElement.innerHTML = `
+                    <h3>${alert.properties.headline}</h3>
+                    const sameCodes = alert.properties.geocode.SAME.join(', ');
+                    <p><strong>Description:</strong> ${alert.properties.description}</p>
+                    <p><strong>Effective Time:</strong> ${alert.properties.effective}</p>
+                    <p><strong>Expires Time:</strong> ${alert.properties.expires}</p>
+                    <p><strong>Area Description:</strong> ${alert.properties.areaDesc}</p>
+                    <p><strong>Active SAME codes:</strong> ${alert.geocodes.SAME.join(', ')}</p>
+                `;
                 resultsElement.appendChild(alertElement);
             });
         });
     </script>
 </body>
 </html>
+
