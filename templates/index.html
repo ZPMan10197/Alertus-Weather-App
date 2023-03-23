@@ -11,14 +11,7 @@
         <select name="state" id="state" required>
             <!-- Add all 50 US states as <option> elements -->
         </select>
-        <label for="severity">Severity:</label>
-        <select name="severity" id="severity">
-            <option value="Extreme">Extreme</option>
-            <option value="Severe">Severe</option>
-            <option value="Moderate">Moderate</option>
-            <option value="Minor">Minor</option>
-            <option value="Unknown">Unknown</option>
-        </select>
+        
         <label for="urgency">Urgency:</label>
         <select name="urgency" id="urgency">
             <option value="Immediate">Immediate</option>
@@ -27,6 +20,28 @@
             <option value="Immediate">Unknown</option>
             <!-- Add other urgency options -->
         </select>
+
+        <label for="severity">Severity:</label>
+        <select name="severity" id="severity">
+            <option value="Extreme">Extreme</option>
+            <option value="Severe">Severe</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Minor">Minor</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+
+        <label for="certainty">Certainty:</label>
+        <select name="certainty" id="certainty">
+            <option value="Observed">Observed</option>
+            <option value="Likely">Likely</option>
+            <option value="Possible">Possible</option>
+            <option value="Unlikely">Unlikely</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+
+        <label for="max_results">Max Results:</label>
+        <input type="number" name="max_results" id="max_results" min="1" required>
+
         <input type="submit" value="Submit">
     </form>
 </body>
