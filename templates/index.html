@@ -57,27 +57,32 @@
     <script>
         document.querySelector('form').addEventListener('submit', async (event) => {
             event.preventDefault();
+            const form = event.target;
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
 
-            const formData = new FormData(event.target);
-            const response = await fetch('/', { method: 'POST', body: formData });
-            const data = await response.json();
-
-            const resultsElement = document.getElementById('results');
-            resultsElement.innerHTML = '';
-
-            data.forEach(alert => {
-                const alertElement = document.createElement('div');
-                alertElement.innerHTML = `
-                    <h3>${alert.properties.headline}</h3>
-                    const sameCodes = alert.properties.geocode.SAME.join(', ');
-                    <p><strong>Description:</strong> ${alert.properties.description}</p>
-                    <p><strong>Effective Time:</strong> ${alert.properties.effective}</p>
-                    <p><strong>Expires Time:</strong> ${alert.properties.expires}</p>
-                    <p><strong>Area Description:</strong> ${alert.properties.areaDesc}</p>
-                    <p><strong>Active SAME codes:</strong> ${alert.geocodes.SAME.join(', ')}</p>
-                `;
-                resultsElement.appendChild(alertElement);
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
             });
+
+            if (response.ok) {
+                const data = await response.json();
+                for (const alert of data.alerts) {
+                    const alertElement = document.createElement('div');
+                    alertElement.innerHTML = `
+                        <h3>${alert.headline}</h3>
+                        <p>${alert.description}</p>
+                        <p><strong>Effective Time:</strong> ${alert.effective}</p>
+                        <p><strong>Expires Time:</strong> ${alert.expires}</p>
+                        <p><strong>Area Description:</strong> ${alert.areaDesc}</p>
+                        <p><strong>SAME Codes:</strong> ${alert.sameCodes.join(', ')}</p>
+                    `;
+                    resultsContainer.appendChild(alertElement);
+                }
+            } else {
+                resultsContainer.innerHTML = '<p>Error: Unable to fetch data.</p>';
+            }
         });
     </script>
 </body>
