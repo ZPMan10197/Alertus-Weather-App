@@ -94,6 +94,24 @@
 
         <input type="submit" value="Submit">
     </form>
+    {% if alerts is not none %}
+    <div>
+        <h2>Active Weather Alerts:</h2>
+        <ul>
+            {% for alert in alerts %}
+                <li>
+                    <h3>{{ alert.properties.headline }}</h3>
+                    <p>Description: {{ alert.properties.description }}</p>
+                    <p>Effective Time: {{ alert.properties.effective }}</p>
+                    <p>Expires Time: {{ alert.properties.expires }}</p>
+                    <p>Area Description: {{ alert.properties.areaDesc }}</p>
+                    <p>Active SAME Codes: {{ alert.properties.geocode.SAME|join(', ') }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
 </body>
 
 </html>
