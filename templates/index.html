@@ -67,9 +67,18 @@
 
             data.forEach(alert => {
                 const alertElement = document.createElement('div');
-                alertElement.innerHTML = `<h3>${alert.properties.headline}</h3><p>${alert.properties.description}</p>`;
-                resultsElement.appendChild(alertElement);
-            });
+                const properties = alert.properties;
+                 alertElement.innerHTML = `
+                    <h3>${properties.headline}</h3>
+                    <p>${properties.description}</p>
+                    <p>Effective Time: ${properties.effective}</p>
+                    <p>Expires Time: ${properties.expires}</p>
+                    <p>Area Description: ${properties.areaDesc}</p>
+                    <p>SAME Codes: ${properties.geocode.SAME.join(', ')}</p>
+    `;
+    resultsElement.appendChild(alertElement);
+});
+
         });
     </script>
 </body>
