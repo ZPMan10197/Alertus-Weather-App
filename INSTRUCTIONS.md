@@ -5,7 +5,7 @@
 1. Make sure you have Python and Flask installed.
 2. Open a terminal and navigate to the project directory.
 3. Run `python app.py` or `python3 app.py` depending on your Python installation.
-4. Open your browser and go to `http://localhost:5000` / http://127.0.0.1:5000.
+4. Open your browser and go to 'http://127.0.0.1:5000'
 
 ## Explanations and highlights
 
@@ -21,4 +21,4 @@
 ## Time spent on the project
 
 - Part 1: 1 hour
-- Part 2: 2 hours
+- Part 2: 3 hours
