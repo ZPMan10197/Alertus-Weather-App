@@ -17,6 +17,7 @@
 
 - Formatting the API request to match the NOAA API requirements.
 - Displaying the results in an organized and easy-to-read manner.
+- Airplay on Mac was interfering with localhost port 5000 to run the program.
 
 ## Time spent on the project
 
